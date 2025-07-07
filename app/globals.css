@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: 15 23 42;        /* slate-900 */
+  --secondary: 30 41 59;      /* slate-800 */
+  --accent: 59 130 246;       /* blue-500 */
+  --accent-light: 96 165 250; /* blue-400 */
+  --text-primary: 15 23 42;   /* slate-900 */
+  --text-secondary: 100 116 139; /* slate-500 */
+  --text-light: 148 163 184;  /* slate-400 */
+  --surface: 255 255 255;     /* white */
+  --surface-alt: 248 250 252; /* slate-50 */
+  --border: 226 232 240;      /* slate-200 */
+  --font-inter: 'Inter', sans-serif;
 }
 
 @theme inline {
@@ -14,13 +23,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --primary: 255 255 255; /* white for text in dark mode */
+    --surface: 15 23 42;     /* slate-900 for background */
+    --surface-alt: 30 41 59; /* slate-800 for alt bg */
+    --border: 51 65 85;      /* slate-700 */
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--surface));
+  color: rgb(var(--text-primary));
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
