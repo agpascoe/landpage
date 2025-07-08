@@ -8,7 +8,7 @@ export default function StructuredData() {
       '@type': 'Organization',
       name: 'Independent Consultant'
     },
-    url: 'https://albertopascoe.com',
+    url: 'https://jagpascoe.info',
     sameAs: [
       'https://www.linkedin.com/in/agpascoe'
     ],

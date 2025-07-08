@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://albertopascoe.com',
+    url: 'https://jagpascoe.info',
     title: 'Alberto (JAG) Pascoe - Digital Transformation Leader',
     description: 'Chief Digital Executive with 25+ years experience leading digital transformation projects across LATAM.',
     siteName: 'Alberto (JAG) Pascoe',
