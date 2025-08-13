@@ -13,7 +13,7 @@ export const stats = [
   { number: "25+", label: "Years Experience" },
   { number: "4", label: "Major Ventures Founded" },
   { number: "1k/project", label: "Professionals Led" },
-  { number: "50+", label: "Key Strategic Projects" },
+  { number: "25+", label: "Key Strategic Projects" },
   { number: "8+", label: "Startups from Scratch" }
 ]
 
@@ -84,7 +84,7 @@ export const timeline = [
     id: "indra-mx-ca",
     period: "2020 - 2022",
     title: "Services Solutions & Business Development Officer",
-    company: "Indra - Mexico & Canada",
+    company: "Indra - Mexico & North Am",
     description: "Strategic leadership managing $150MM USD portfolio while driving digital modernization initiatives."
   },
   {
