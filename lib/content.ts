@@ -90,7 +90,8 @@ export const ventures = [
     title: "Keryu",
     role: "Co-Founder & CTO",
     description: "Forthcoming",
-    period: "--"
+    period: "--",
+    logo: "/images/ventures/keryu-logo.jpeg"
   }
 ]
 
