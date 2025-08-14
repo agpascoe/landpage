@@ -26,7 +26,9 @@ export const stats = [
   // Capabilities (Resources) Perspective
   { number: "500+", label: "Proffesionales led by project", perspective: "Capabilities (Resources)" },
   { number: "10+", label: "High Performance Teams Developed", perspective: "Capabilities (Resources)" },
-  { number: "10+ Hrs", label: "By week to PhD, 2 Masters, 95+ Courses & Certifications", perspective: "Capabilities (Resources)" }
+  { number: "15+", label: "Hours by week to study PhD, 2 Masters, 95+ Courses & Certifications", perspective: "Capabilities (Resources)" },
+  { number: "7+", label: "Languages - Spanish, English, Python, C, C++, Java, Go, LLM_Prompts", perspective: "Capabilities (Resources)" },
+  { number: "20+y", label: "In ML/AI Field", perspective: "Capabilities (Resources)" }
 ]
 
 export const about = {
