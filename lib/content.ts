@@ -9,12 +9,23 @@ export const personalInfo = {
 }
 
 export const stats = [
-  { number: "$250M+", label: "Contract Value Managed" },
-  { number: "25+", label: "Years Experience" },
-  { number: "4", label: "Major Ventures Founded" },
-  { number: "1k/project", label: "Professionals Led" },
-  { number: "25+", label: "Key Strategic Projects" },
-  { number: "8+", label: "Startups from Scratch" }
+  // Financial Perspective
+  { number: "$500M+ USD", label: "Contract Value Managed", perspective: "Financial" },
+  { number: "1.5x", label: "ROI Vs Planned", perspective: "Financial" },
+  
+  // Client Perspective
+  { number: "9K+", label: "LinkedIn Contacts & Followers", perspective: "Client" },
+  { number: "100+", label: "Strategic Partnerships", perspective: "Client" },
+  { number: "5", label: "Ventures (Co) Founded", perspective: "Client" },
+  
+  // Process Perspective
+  { number: "25y+", label: "Transforming by Tech", perspective: "Process" },
+  { number: "8+", label: "Startups from Scratch", perspective: "Process" },
+  { number: "25+", label: "Key Strategic Projects", perspective: "Process" },
+  
+  // Capabilities Perspective
+  { number: "500+", label: "Proffesionales led by project", perspective: "Capabilities" },
+  { number: "10+ Hrs", label: "By week to PhD, 2 Masters, 95+ Courses & Certifications", perspective: "Capabilities" }
 ]
 
 export const about = {
@@ -69,6 +80,14 @@ export const ventures = [
     description: "Advanced API-as-a-Service platform revolutionizing US-Mexico remittance management with innovative engagement strategies.",
     period: "--",
     logo: "/images/ventures/cul-logo.jpg"
+  },
+  {
+    id: "keryu",
+    icon: "Keryu",
+    title: "Keryu",
+    role: "Co-Founder & CTO",
+    description: "Forthcoming",
+    period: "--"
   }
 ]
 

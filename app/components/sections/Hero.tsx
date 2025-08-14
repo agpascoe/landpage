@@ -34,7 +34,7 @@ export default function Hero() {
             Chief Digital Executive & Strategic Technology Leader
           </p>
           <p className="text-lg text-white/70 mb-12 max-w-xl">
-            25+ Years Converting Business Vision into Revenue-Generating Digital Assets
+            25+ Years Converting Business Challenges into Revenue-Generating Digital Assets
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button variant="primary" size="lg" onClick={() => {
