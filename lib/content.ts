@@ -9,23 +9,24 @@ export const personalInfo = {
 }
 
 export const stats = [
-  // Financial Perspective
-  { number: "$500M+ USD", label: "Contract Value Managed", perspective: "Financial" },
-  { number: "1.5x", label: "ROI Vs Planned", perspective: "Financial" },
+  // Monetization (Financial) Perspective
+  { number: "$500M+ USD", label: "Contract Value Managed", perspective: "Monetization (Financial)" },
+  { number: "1.5x", label: "ROI Vs Planned", perspective: "Monetization (Financial)" },
   
-  // Client Perspective
-  { number: "9K+", label: "LinkedIn Contacts & Followers", perspective: "Client" },
-  { number: "100+", label: "Strategic Partnerships", perspective: "Client" },
-  { number: "5", label: "Ventures (Co) Founded", perspective: "Client" },
+  // Relationships (Client) Perspective
+  { number: "9K+", label: "LinkedIn Contacts & Followers", perspective: "Relationships (Client)" },
+  { number: "100+", label: "Strategic Partnerships", perspective: "Relationships (Client)" },
+  { number: "5", label: "Ventures (Co) Founded", perspective: "Relationships (Client)" },
   
-  // Process Perspective
-  { number: "25y+", label: "Transforming by Tech", perspective: "Process" },
-  { number: "8+", label: "Startups from Scratch", perspective: "Process" },
-  { number: "25+", label: "Key Strategic Projects", perspective: "Process" },
+  // Performance (Process) Perspective
+  { number: "25y+", label: "Transforming by Tech", perspective: "Performance (Process)" },
+  { number: "8+", label: "Startups from Scratch", perspective: "Performance (Process)" },
+  { number: "25+", label: "Key Strategic Projects", perspective: "Performance (Process)" },
   
-  // Capabilities Perspective
-  { number: "500+", label: "Proffesionales led by project", perspective: "Capabilities" },
-  { number: "10+ Hrs", label: "By week to PhD, 2 Masters, 95+ Courses & Certifications", perspective: "Capabilities" }
+  // Capabilities (Resources) Perspective
+  { number: "500+", label: "Proffesionales led by project", perspective: "Capabilities (Resources)" },
+  { number: "10+", label: "High Performance Teams Developed", perspective: "Capabilities (Resources)" },
+  { number: "10+ Hrs", label: "By week to PhD, 2 Masters, 95+ Courses & Certifications", perspective: "Capabilities (Resources)" }
 ]
 
 export const about = {

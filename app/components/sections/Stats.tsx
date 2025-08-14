@@ -17,7 +17,7 @@ export default function Stats() {
     return acc
   }, {} as Record<string, typeof stats>)
 
-  const perspectives = ['Financial', 'Client', 'Process', 'Capabilities']
+  const perspectives = ['Monetization (Financial)', 'Relationships (Client)', 'Performance (Process)', 'Capabilities (Resources)']
 
   return (
     <section className="py-32 bg-white" ref={ref}>
