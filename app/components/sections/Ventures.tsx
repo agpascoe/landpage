@@ -41,12 +41,16 @@ export default function Ventures() {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
               
               {/* Logo image */}
-              <div className={`w-20 h-20 flex items-center justify-center mb-6 rounded-2xl ${venture.id === 'data-intelligence-factory' ? 'bg-[#0a2342]' : ''}`}>
+              <div className={`${venture.id === 'keryu' ? 'w-28 h-28' : 'w-24 h-24'} flex items-center justify-center mb-6 rounded-2xl ${
+                venture.id === 'data-intelligence-factory' ? 'bg-[#0a2342]' : ''
+              }`}>
                 {venture.logo ? (
                   <img
                     src={venture.logo}
                     alt={venture.title + ' logo'}
-                    className="w-full h-full object-contain rounded-2xl bg-white shadow-md border border-slate-100"
+                    className={`object-contain rounded-2xl ${
+                      venture.id === 'keryu' ? 'w-full h-full' : 'w-full h-full bg-white shadow-md border border-slate-100'
+                    }`}
                   />
                 ) : (
                   <span className="text-white font-bold text-xl">{venture.icon}</span>
