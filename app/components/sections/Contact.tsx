@@ -4,15 +4,24 @@ import { useState } from 'react'
 import { personalInfo } from '@/lib/content'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', message: '', website: '' })
   const [touched, setTouched] = useState({ name: false, email: false, message: false })
+  const [submitAttempted, setSubmitAttempted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const isValid = form.name && form.email && form.message && /.+@.+\..+/.test(form.email)
+  const emailOk = /.+@.+\..+/.test(form.email)
+  const isValid = Boolean(form.name && form.email && form.message && emailOk)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!isValid) return
+    setSubmitAttempted(true)
+
+    // Only show validation errors after submit attempt.
+    if (!isValid) {
+      setTouched({ name: true, email: true, message: true })
+      return
+    }
+
     setStatus('idle')
     try {
       const res = await fetch('/api/messages', {
@@ -22,7 +31,9 @@ export default function Contact() {
       })
       if (res.ok) {
         setStatus('success')
-        setForm({ name: '', email: '', message: '' })
+        setForm({ name: '', email: '', message: '', website: '' })
+        setTouched({ name: false, email: false, message: false })
+        setSubmitAttempted(false)
       } else {
         setStatus('error')
       }
@@ -46,6 +57,16 @@ export default function Contact() {
           </p>
         </div>
         <form className="space-y-8" onSubmit={handleSubmit}>
+          {/* Honeypot field (hidden): bots tend to fill it; humans won't. */}
+          <input
+            className="hidden"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.website}
+            onChange={e => setForm(f => ({ ...f, website: e.target.value }))}
+            aria-hidden="true"
+          />
           <div>
             <label className="block text-slate-700 font-semibold mb-2">Name</label>
             <input
@@ -56,7 +77,9 @@ export default function Contact() {
               onBlur={() => setTouched(t => ({ ...t, name: true }))}
               required
             />
-            {touched.name && !form.name && <div className="text-red-500 text-sm mt-1">Name is required.</div>}
+            {(submitAttempted || touched.name) && !form.name && (
+              <div className="text-red-500 text-sm mt-1">Name is required.</div>
+            )}
           </div>
           <div>
             <label className="block text-slate-700 font-semibold mb-2">Email</label>
@@ -68,8 +91,12 @@ export default function Contact() {
               onBlur={() => setTouched(t => ({ ...t, email: true }))}
               required
             />
-            {touched.email && !form.email && <div className="text-red-500 text-sm mt-1">Email is required.</div>}
-            {touched.email && form.email && !/.+@.+\..+/.test(form.email) && <div className="text-red-500 text-sm mt-1">Enter a valid email.</div>}
+            {(submitAttempted || touched.email) && !form.email && (
+              <div className="text-red-500 text-sm mt-1">Email is required.</div>
+            )}
+            {(submitAttempted || touched.email) && form.email && !emailOk && (
+              <div className="text-red-500 text-sm mt-1">Enter a valid email.</div>
+            )}
           </div>
           <div>
             <label className="block text-slate-700 font-semibold mb-2">Message</label>
@@ -80,12 +107,13 @@ export default function Contact() {
               onBlur={() => setTouched(t => ({ ...t, message: true }))}
               required
             />
-            {touched.message && !form.message && <div className="text-red-500 text-sm mt-1">Message is required.</div>}
+            {(submitAttempted || touched.message) && !form.message && (
+              <div className="text-red-500 text-sm mt-1">Message is required.</div>
+            )}
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl transition hover:bg-blue-400 disabled:opacity-50"
-            disabled={!isValid}
+            className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl transition hover:bg-blue-400"
           >
             Send Message
           </button>
