@@ -13,10 +13,10 @@ export const stats = [
   { number: "$500M+ USD", label: "Contract Value Managed", perspective: "Monetization (Financial)" },
   { number: "1.5x", label: "ROI Vs Planned", perspective: "Monetization (Financial)" },
   
-  // Relationships (Client) Perspective
-  { number: "9K+", label: "LinkedIn Contacts & Followers", perspective: "Relationships (Client)" },
-  { number: "100+", label: "Strategic Partnerships", perspective: "Relationships (Client)" },
-  { number: "5", label: "Ventures (Co) Founded", perspective: "Relationships (Client)" },
+  // Relationships (Clients) Perspective
+  { number: "9K+", label: "LinkedIn Contacts & Followers", perspective: "Relationships (Clients)" },
+  { number: "100+", label: "Strategic Partnerships", perspective: "Relationships (Clients)" },
+  { number: "5", label: "Ventures (Co) Founded", perspective: "Relationships (Clients)" },
   
   // Performance (Process) Perspective
   { number: "25y+", label: "Transforming by Tech", perspective: "Performance (Process)" },
