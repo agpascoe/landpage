@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 import { ventures } from '@/lib/content'
 
@@ -45,9 +46,11 @@ export default function Ventures() {
                 venture.id === 'data-intelligence-factory' ? 'bg-[#0a2342]' : ''
               }`}>
                 {venture.logo ? (
-                  <img
+                  <Image
                     src={venture.logo}
                     alt={venture.title + ' logo'}
+                    width={venture.id === 'keryu' ? 112 : 96}
+                    height={venture.id === 'keryu' ? 112 : 96}
                     className={`object-contain rounded-2xl ${
                       venture.id === 'keryu' ? 'w-full h-full' : 'w-full h-full bg-white shadow-md border border-slate-100'
                     }`}
