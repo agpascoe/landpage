@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/app/components/ui/button'
 import Image from 'next/image'
+import { personalInfo } from '@/lib/content'
 
 export default function Hero() {
   return (
@@ -21,29 +22,31 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-6 leading-[1.05] tracking-tight">
-            AI‑Enabled Transformation & Monetization Executive
+            {personalInfo.title}
           </h1>
 
-          <p className="text-xl text-white/80 mb-3 max-w-2xl">
-            I turn business challenges into measurable outcomes through platforms, data, and applied AI—strategy to execution.
+          <p className="text-xl text-white/80 mb-4 max-w-2xl">
+            {personalInfo.tagline}
           </p>
 
           <p className="text-lg text-white/70 mb-6 max-w-2xl">
-            Alberto (JAG) Pascoe · Chief Digital Executive & Strategic Technology Leader
+            {personalInfo.name}
+          </p>
+
+          <p className="text-white/75 mb-4 max-w-2xl">
+            25+ years | up to 1500+ professionals led | large-scale AI/ML, payments, mortgage,
+            insurance, and platform transformations.
           </p>
 
           <ul className="text-white/75 mb-10 max-w-2xl space-y-2 list-disc pl-6">
             <li>
-              <span className="font-semibold text-white/90">Venture builder:</span> founded/co‑founded{' '}
-              <span className="font-semibold text-white/90">6 startups</span> across PropTech, AI/ML, and FinTech
+              <span className="font-semibold text-white/90">Enterprise scale:</span> 30M+ people enabled via pension platform access and high-volume payment ecosystems.
             </li>
             <li>
-              <span className="font-semibold text-white/90">AI‑enabled transformation:</span> modernization for{' '}
-              <span className="font-semibold text-white/90">1 mortgage bank, 2 insurance companies, and 1 pension administrator</span>
+              <span className="font-semibold text-white/90">Execution discipline:</span> flagship programs delivered on time and budget with continuity and governance controls.
             </li>
             <li>
-              <span className="font-semibold text-white/90">Global leadership:</span> senior executive roles in{' '}
-              <span className="font-semibold text-white/90">3 global companies</span>, leading large-scale teams and portfolios
+              <span className="font-semibold text-white/90">Transformation leadership:</span> cross-industry execution across leading financial institutions, global consulting firms, and ventures.
             </li>
           </ul>
 
