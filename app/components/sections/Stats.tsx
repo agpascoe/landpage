@@ -17,7 +17,18 @@ export default function Stats() {
     return acc
   }, {} as Record<string, typeof stats>)
 
-  const perspectives = ['Monetization (Financial)', 'Relationship (Clients)', 'Performance (Process)', 'Capabilities (Resources)']
+  const preferredOrder = [
+    'Financial Impact',
+    'Client & Market',
+    'Operational Excellence',
+    'Capability & Leadership',
+    'Monetization (Financial)',
+    'Relationship (Clients)',
+    'Performance (Process)',
+    'Capabilities (Resources)'
+  ]
+
+  const perspectives = preferredOrder.filter((p) => groupedStats[p]?.length)
 
   return (
     <section className="py-32 bg-white" ref={ref}>
