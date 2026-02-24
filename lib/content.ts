@@ -156,7 +156,7 @@ export const executiveProof = [
   "National pension/data platform: 18 months, $50MM, up to 500+ professionals, 30M+ users enabled.",
   "Digital B2B payments platform: 18 months, $50MM, up to 750+ professionals, ~20M transactions/month.",
   "Mortgage + insurance core transformations: 24 months, $40–50MM, regulatory-aligned execution.",
-  "INDRA & DXC trajectory: scaled multi-country transformation portfolios (~$150MM and ~$100MM/year) with enterprise governance and delivery controls.",
+  "Global Tech Companies trajectory: scaled multi-country transformation portfolios (~$150MM and ~$100MM/year) with enterprise governance and delivery controls.",
   "Leading Retail Bank path: customer-acquisition technology transformation across branch/web/mobile/partner channels with 95% time-to-market cadence and 99% continuity."
 ]
 
