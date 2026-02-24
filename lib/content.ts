@@ -152,7 +152,7 @@ export const contact = {
 
 // Ready for future UI blocks
 export const executiveProof = [
-  "AI/ML operating model: ideation-to-scale delivery with governance discipline.",
+  "AI/ML operating model: ideation-to-scale delivery with governance discipline. Grap-IA, di-factory.co, mortgage credit scoring, several ML models at Banking, Insurance, and Retail.",
   "National pension/data platform: 18 months, $50MM, up to 500+ professionals, 30M+ users enabled.",
   "Digital B2B payments platform: 18 months, $50MM, up to 750+ professionals, ~20M transactions/month.",
   "Mortgage + insurance core transformations: 24 months, $40–50MM, regulatory-aligned execution.",
