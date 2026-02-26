@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { personalInfo } from '@/lib/content'
+import { contact, personalInfo } from '@/lib/content'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', website: '' })
@@ -54,6 +54,9 @@ export default function Contact() {
           </h2>
           <p className="text-lg text-slate-600">
             Interested in working together or have a question? Reach out below or email <a href={`mailto:${personalInfo.email}`} className="text-blue-500 underline">{personalInfo.email}</a>.
+          </p>
+          <p className="text-sm text-slate-500 mt-3 font-medium">
+            {contact.secondaryCta}
           </p>
         </div>
         <form className="space-y-8" onSubmit={handleSubmit}>
@@ -115,7 +118,7 @@ export default function Contact() {
             type="submit"
             className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl transition hover:bg-blue-400"
           >
-            Send Message
+            {contact.primaryCta}
           </button>
         </form>
         {status === 'success' && (
