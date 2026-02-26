@@ -2,6 +2,8 @@
 
 This project is deployed on **Vercel**. Contact form delivery is handled by **Resend** via `app/api/messages/route.ts`.
 
+For contact-flow operations, troubleshooting, and escalation, see: **`RUNBOOK_CONTACT_FLOW.md`**.
+
 ## Architecture (current)
 
 - Runtime: Next.js App Router on Vercel
