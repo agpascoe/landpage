@@ -1,305 +1,98 @@
-# 🚀 Alberto (JAG) Pascoe Landing Page - Deployment Guide
+# Deployment Guide (Production)
 
-This guide provides step-by-step instructions to deploy the Alberto (JAG) Pascoe landing page from scratch.
+This project is deployed on **Vercel**. Contact form delivery is handled by **Resend** via `app/api/messages/route.ts`.
 
-## 📋 Prerequisites
+## Architecture (current)
 
-- Ubuntu 22.04+ server with root access
-- Domain name (e.g., `jagpascoe.info`)
-- Basic knowledge of Linux commands and web servers
+- Runtime: Next.js App Router on Vercel
+- Production deploy trigger: push/merge to `main` (Vercel auto-deploy)
+- Contact pipeline: `/api/messages` → Resend email API
+- No VM/SSH/Nginx/PM2/filesystem message storage in production
 
-## 🛠️ Step 1: Server Setup
+## Prerequisites
 
-### 1.1 Update System
-```bash
-sudo apt update && sudo apt upgrade -y
-```
+- Access to:
+  - GitHub repo: `agpascoe/landpage`
+  - Vercel project linked to this repo
+  - Resend account with verified sender/domain
+- Local tooling for validation:
+  - Node.js 18+ (recommend current LTS)
+  - npm
 
-### 1.2 Install Node.js and npm
-```bash
-# Install Node.js 18+ (LTS)
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+## Required environment variables
 
-# Verify installation
-node --version
-npm --version
-```
+Set in Vercel project environment (Production, and Preview if desired):
 
-### 1.3 Install Nginx
-```bash
-sudo apt install nginx -y
-sudo systemctl enable nginx
-sudo systemctl start nginx
-```
+- `RESEND_API_KEY`
+- `CONTACT_TO`
+- `CONTACT_FROM` (must be a verified Resend sender/domain)
 
-### 1.4 Install Certbot for SSL
-```bash
-sudo apt install certbot python3-certbot-nginx -y
-```
+Local development uses `.env.local` (see `.env.example` / `.env.development.example`).
 
-## 📁 Step 2: Application Setup
+## Deploy flow (standard)
 
-### 2.1 Clone Repository
-```bash
-# Navigate to web directory
-cd /var/www
+1. Create branch and implement change.
+2. Validate locally:
+   ```bash
+   npm run lint
+   npm run build
+   npm run dev
+   ```
+3. Open PR and merge to `main` after approval.
+4. Vercel automatically builds and deploys `main` to production.
+5. Smoke check:
+   - Home page loads on `https://jagpascoe.info`
+   - Contact form submission succeeds
 
-# Clone your repository (replace with your actual repo URL)
-sudo git clone https://github.com/yourusername/landpage.git
-sudo chown -R ubuntu:ubuntu landpage
-cd landpage
-```
+## Rollback basics
 
-### 2.2 Install Dependencies
-```bash
-npm install
-```
+Fastest rollback options:
 
-### 2.3 Build for Production
-```bash
-npm run build
-```
+1. **Git revert** the breaking commit on `main` and push.
+2. Or **redeploy the last known-good deployment** from Vercel.
 
-## 🌐 Step 3: Domain Configuration
+After rollback, re-run smoke checks (site + contact form).
 
-### 3.1 Configure Nginx Site
-Create nginx configuration file:
+## Contact API operational notes
 
-```bash
-sudo nano /etc/nginx/sites-available/jagpascoe.info
-```
+Endpoint: `POST /api/messages`
 
-Add the following configuration:
+Expected JSON body:
 
-```nginx
-server {
-    server_name jagpascoe.info www.jagpascoe.info;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection upgrade;
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    listen 80;
+```json
+{
+  "name": "...",
+  "email": "...",
+  "message": "...",
+  "website": "" 
 }
 ```
 
-### 3.2 Enable Site
-```bash
-sudo ln -s /etc/nginx/sites-available/jagpascoe.info /etc/nginx/sites-enabled/
-sudo rm /etc/nginx/sites-enabled/default
-sudo nginx -t
-sudo systemctl reload nginx
-```
+Behavior:
 
-### 3.3 Configure DNS
-Point your domain to your server's IP address:
-- Add A record: `jagpascoe.info` → `YOUR_SERVER_IP`
-- Add A record: `www.jagpascoe.info` → `YOUR_SERVER_IP`
+- `website` is a honeypot field; if populated, API returns success without sending email.
+- Missing `name`, `email`, or `message` returns `400`.
+- Missing env vars returns `500` (`Missing env var: ...`).
+- Resend provider failures return `502`.
+- Success returns `{ "success": true, "id": "..." }`.
 
-## 🔒 Step 4: SSL Certificate Setup
+## Troubleshooting quick checks
 
-### 4.1 Obtain SSL Certificate
-```bash
-sudo certbot --nginx -d jagpascoe.info -d www.jagpascoe.info
-```
+1. **Deployment failing on Vercel**
+   - Check build logs for lint/type/build errors.
+   - Confirm `main` branch is connected to the correct Vercel project.
 
-### 4.2 Verify Auto-renewal
-```bash
-sudo certbot renew --dry-run
-```
+2. **Contact form returns 500**
+   - Verify `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM` are set in Vercel.
+   - Confirm `CONTACT_FROM` is verified in Resend.
 
-## 🚀 Step 5: Production Deployment
+3. **Contact form returns 502**
+   - Check Resend dashboard/API status and logs.
+   - Validate API key scope and sender/domain verification.
 
-### 5.1 Start Production Server
-```bash
-# Navigate to project directory
-cd /var/www/landpage
-
-# Start production server
-npm start
-```
-
-### 5.2 Set Up Process Manager (PM2) - Recommended
-```bash
-# Install PM2 globally
-sudo npm install -g pm2
-
-# Start application with PM2
-pm2 start npm --name "jagpascoe-site" -- start
-
-# Save PM2 configuration
-pm2 save
-
-# Set up PM2 to start on boot
-pm2 startup
-```
-
-### 5.3 Verify Deployment
-```bash
-# Check if site is accessible
-curl -I https://jagpascoe.info
-
-# Check if API is working
-curl -X POST https://jagpascoe.info/api/messages \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@example.com","message":"Test message"}'
-```
-
-## 🔧 Step 6: Development Workflow
-
-### 6.1 Development Mode
-```bash
-cd /var/www/landpage
-npm run dev
-```
-Access at: http://localhost:3000
-
-### 6.2 Production Mode
-```bash
-cd /var/www/landpage
-npm run build
-npm start
-```
-Access at: https://jagpascoe.info
-
-### 6.3 Updating the Site
-```bash
-# Pull latest changes
-git pull origin main
-
-# Install new dependencies (if any)
-npm install
-
-# Build for production
-npm run build
-
-# Restart the server
-pm2 restart jagpascoe-site
-# OR if not using PM2:
-# pkill -f "next start" && npm start
-```
-
-## 📁 Step 7: File Structure
-
-```
-/var/www/landpage/
-├── app/
-│   ├── components/
-│   │   ├── sections/     # Page sections
-│   │   ├── ui/          # UI components
-│   │   └── layout/      # Header/Footer
-│   ├── api/messages/    # Contact form API
-│   └── globals.css      # Global styles
-├── lib/
-│   └── content.ts       # Content data
-├── Messages/            # Contact form submissions
-├── public/images/       # Static assets
-├── package.json         # Dependencies
-└── next.config.ts       # Next.js config
-```
-
-## 🔍 Step 8: Monitoring and Maintenance
-
-### 8.1 Check Application Status
-```bash
-# Check PM2 status
-pm2 status
-
-# Check nginx status
-sudo systemctl status nginx
-
-# Check SSL certificate
-sudo certbot certificates
-```
-
-### 8.2 View Logs
-```bash
-# Application logs
-pm2 logs jagpascoe-site
-
-# Nginx logs
-sudo tail -f /var/log/nginx/access.log
-sudo tail -f /var/log/nginx/error.log
-```
-
-### 8.3 Backup Contact Messages
-```bash
-# Backup contact form submissions
-cp -r /var/www/landpage/Messages/ /backup/messages-$(date +%Y%m%d)
-```
-
-## 🛡️ Step 9: Security Considerations
-
-### 9.1 Firewall Setup
-```bash
-# Allow SSH, HTTP, and HTTPS
-sudo ufw allow ssh
-sudo ufw allow 'Nginx Full'
-sudo ufw enable
-```
-
-### 9.2 Regular Updates
-```bash
-# Update system packages
-sudo apt update && sudo apt upgrade -y
-
-# Update Node.js dependencies
-npm audit fix
-```
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-1. **Port 3000 not accessible**
-   ```bash
-   # Check if Next.js is running
-   ps aux | grep "next start"
-   
-   # Restart if needed
-   pm2 restart jagpascoe-site
-   ```
-
-2. **SSL certificate issues**
-   ```bash
-   # Renew certificate
-   sudo certbot renew
-   
-   # Check certificate status
-   sudo certbot certificates
-   ```
-
-3. **Nginx configuration errors**
-   ```bash
-   # Test configuration
-   sudo nginx -t
-   
-   # Reload nginx
-   sudo systemctl reload nginx
-   ```
-
-4. **Build errors**
-   ```bash
-   # Clear Next.js cache
-   rm -rf .next
-   npm run build
-   ```
-
-## 📞 Support
-
-For issues or questions:
-- Check logs: `pm2 logs jagpascoe-site`
-- Verify nginx: `sudo nginx -t`
-- Test SSL: `sudo certbot certificates`
+4. **Local works, production fails**
+   - Compare local `.env.local` vs Vercel env values.
+   - Confirm latest commit is deployed to production.
 
 ---
-
-**Last Updated**: July 2025  
-**Version**: 1.0  
-**Environment**: Ubuntu 22.04 + Node.js 18 + Nginx + Let's Encrypt 
+Last updated: 2026-02-25

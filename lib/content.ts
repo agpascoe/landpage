@@ -11,9 +11,9 @@ export const personalInfo = {
 
 export const stats = [
   // Financial Impact
-  { number: "$150MM+", label: "Transformation Portfolio Scope Managed", perspective: "Financial Impact" },
-  { number: "$100MM/year", label: "Annual Contract Value Delivered", perspective: "Financial Impact" },
-  { number: "$5–10B MXN/month", label: "B2B Payment Throughput Enabled", perspective: "Financial Impact" },
+  { number: "$150MM+", label: "Top Transformation Portfolio Scope Managed", perspective: "Financial Impact" },
+  { number: "$100MM/year", label: "Annual Contract Value Delivered as BIZ Developer", perspective: "Financial Impact" },
+  { number: "$5–10B MXN/month", label: "First Digital B2B Payment MX Throughput Enabled", perspective: "Financial Impact" },
 
   // Client & Market
   { number: "30M+", label: "People Enabled via Pension Platform Access", perspective: "Client & Market" },
@@ -21,9 +21,9 @@ export const stats = [
   { number: "20+", label: "Cities in Multi-City Operating Footprint", perspective: "Client & Market" },
 
   // Operational Excellence
-  { number: "100%", label: "On-Track Delivery in Flagship Programs", perspective: "Operational Excellence" },
-  { number: "~20M/month", label: "Payment Processing Scale", perspective: "Operational Excellence" },
-  { number: "95%", label: "Time-to-Market Delivery Cadence", perspective: "Operational Excellence" },
+  { number: "99.9%", label: "On-Track Delivery in Flagship Programs", perspective: "Operational Excellence" },
+  { number: "~20M/month", label: "First MX Digital Payment Processing Scale", perspective: "Operational Excellence" },
+  { number: "99.9%", label: "Time-to-Market Delivery Cadence", perspective: "Operational Excellence" },
 
   // Capability & Leadership
   { number: "Up to 1500+", label: "Professionals Led (Global, Cross-Practice)", perspective: "Capability & Leadership" },
@@ -146,8 +146,8 @@ export const contact = {
   email: "agonzalp@icloud.com",
   location: "Mexico City, Mexico",
   linkedin: "https://www.linkedin.com/in/agpascoe",
-  primaryCta: "Discuss a CIO/CTO mandate",
-  secondaryCta: "Discuss AI transformation advisory"
+  primaryCta: "Book a Strategic Call",
+  secondaryCta: "Discuss Your Transformation Mandate"
 }
 
 // Ready for future UI blocks
