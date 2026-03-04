@@ -1,24 +1,45 @@
 'use client'
 
 import { useState } from 'react'
-import { contact, personalInfo } from '@/lib/content'
+import { personalInfo } from '@/lib/content'
+import { trackEvent } from '@/lib/analytics'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', website: '' })
   const [touched, setTouched] = useState({ name: false, email: false, message: false })
   const [submitAttempted, setSubmitAttempted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [intentTracked, setIntentTracked] = useState(false)
 
   const emailOk = /.+@.+\..+/.test(form.email)
-  const isValid = Boolean(form.name && form.email && form.message && emailOk)
+  const messageOk = form.message.trim().length >= 20 && form.message.trim().length <= 2000
+  const isValid = Boolean(form.name && form.email && emailOk && messageOk)
+
+  function trackIntentOnce() {
+    if (intentTracked) return
+
+    trackEvent({
+      event: 'contact_intent',
+      props: { location: 'contact_form' },
+    })
+    setIntentTracked(true)
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSubmitAttempted(true)
+    setErrorMessage('')
+
+    trackEvent({
+      event: 'contact_submit',
+      props: { location: 'contact_form', status: 'attempt' },
+    })
 
     // Only show validation errors after submit attempt.
     if (!isValid) {
       setTouched({ name: true, email: true, message: true })
+      setErrorMessage('Please fix the highlighted fields before sending.')
       return
     }
 
@@ -30,15 +51,40 @@ export default function Contact() {
         body: JSON.stringify(form),
       })
       if (res.ok) {
+        trackEvent({
+          event: 'contact_submit',
+          props: { location: 'contact_form', status: 'success' },
+        })
         setStatus('success')
+        setErrorMessage('')
         setForm({ name: '', email: '', message: '', website: '' })
         setTouched({ name: false, email: false, message: false })
         setSubmitAttempted(false)
       } else {
+        const data = await res.json().catch(() => ({}))
+        trackEvent({
+          event: 'contact_submit',
+          props: { location: 'contact_form', status: 'error' },
+        })
         setStatus('error')
+        const apiError = typeof data?.error === 'string' ? data.error : ''
+        if (apiError === 'Invalid message') {
+          setErrorMessage('Message must be between 20 and 2000 characters.')
+        } else if (apiError === 'Invalid email') {
+          setErrorMessage('Please enter a valid email address.')
+        } else if (apiError === 'Invalid name') {
+          setErrorMessage('Name must be between 2 and 120 characters.')
+        } else {
+          setErrorMessage(apiError || 'There was an error sending your message. Please try again.')
+        }
       }
     } catch {
+      trackEvent({
+        event: 'contact_submit',
+        props: { location: 'contact_form', status: 'error' },
+      })
       setStatus('error')
+      setErrorMessage('Network error. Please try again in a moment.')
     }
   }
 
@@ -50,16 +96,37 @@ export default function Contact() {
             Contact
           </div>
           <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight tracking-tight">
-            Start a Conversation
+            Let&apos;s Talk
           </h2>
           <p className="text-lg text-slate-600">
-            Interested in working together or have a question? Reach out below or email <a href={`mailto:${personalInfo.email}`} className="text-blue-500 underline">{personalInfo.email}</a>.
+            Choose the path that fits your objective.
           </p>
           <p className="text-sm text-slate-500 mt-3 font-medium">
             {contact.secondaryCta}
           </p>
         </div>
-        <form className="space-y-8" onSubmit={handleSubmit}>
+        <div className="grid gap-4 mb-10">
+          <a
+            href="https://cal.com/jag-pascoe/discuss-a-cio-cto-mandate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl transition hover:bg-slate-800 text-center"
+          >
+            Discuss a CIO/CTO Mandate
+          </a>
+          <a
+            href="https://cal.com/jag-pascoe/discuss-ai-transformation-advisory"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl transition hover:bg-blue-400 text-center"
+          >
+            Discuss AI Transformation Advisory
+          </a>
+        </div>
+
+        <p className="text-sm text-slate-500 font-semibold mb-4">Send a Message Instead</p>
+
+        <form className="space-y-8" onSubmit={handleSubmit} onFocusCapture={trackIntentOnce}>
           {/* Honeypot field (hidden): bots tend to fill it; humans won't. */}
           <input
             className="hidden"
@@ -110,24 +177,28 @@ export default function Contact() {
               onBlur={() => setTouched(t => ({ ...t, message: true }))}
               required
             />
+            <div className="text-slate-500 text-sm mt-1">Minimum 20 characters ({form.message.trim().length}/2000).</div>
             {(submitAttempted || touched.message) && !form.message && (
               <div className="text-red-500 text-sm mt-1">Message is required.</div>
+            )}
+            {(submitAttempted || touched.message) && form.message && !messageOk && (
+              <div className="text-red-500 text-sm mt-1">Message must be between 20 and 2000 characters.</div>
             )}
           </div>
           <button
             type="submit"
             className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl transition hover:bg-blue-400"
           >
-            {contact.primaryCta}
+            Send Message
           </button>
         </form>
         {status === 'success' && (
           <div className="mt-6 text-green-600 font-semibold">Message sent successfully!</div>
         )}
         {status === 'error' && (
-          <div className="mt-6 text-red-600 font-semibold">There was an error sending your message. Please try again.</div>
+          <div className="mt-6 text-red-600 font-semibold">{errorMessage || 'There was an error sending your message. Please try again.'}</div>
         )}
       </div>
     </section>
   )
-} 
+}
