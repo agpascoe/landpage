@@ -102,7 +102,7 @@ export default function Contact() {
             Choose the path that fits your objective.
           </p>
           <p className="text-sm text-slate-500 mt-3 font-medium">
-            {contact.secondaryCta}
+            Prefer async? Share context and I&apos;ll follow up.
           </p>
         </div>
         <div className="grid gap-4 mb-10">
