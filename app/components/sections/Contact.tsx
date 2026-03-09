@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { personalInfo } from '@/lib/content'
 import { trackEvent } from '@/lib/analytics'
 
 export default function Contact() {
