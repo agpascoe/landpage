@@ -93,7 +93,7 @@ export default function Hero() {
         >
           <div className="relative flex justify-center items-center w-full">
             <Image
-              src="/images/hero-photo.jpg"
+              src="/images/hero-photo.png"
               alt="Alberto (JAG) Pascoe headshot"
               width={630}
               height={630}
