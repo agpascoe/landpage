@@ -12,8 +12,8 @@ const buttonVariants = cva(
         secondary: "border-2 border-white/30 text-white hover:border-white hover:bg-white/10",
       },
       size: {
-        default: "h-12 px-8 py-3",
-        lg: "h-14 px-10 py-4 text-lg",
+        default: "min-h-12 px-8 py-3",
+        lg: "min-h-14 px-10 py-4 text-lg",
       },
     },
     defaultVariants: {
