@@ -175,6 +175,21 @@ export const valueLanes = [
   }
 ]
 
+export const certifications = [
+  "Project Management Professional (PMP)",
+  "Scrum Master Certified (SMC)",
+  "ITIL Foundation",
+  "TOGAF Foundation",
+  "AWS Certified Solutions Architect",
+  "Microsoft Azure Fundamentals",
+  "Google Cloud Digital Leader",
+  "SAFe Agilist",
+  "Certified Information Systems Security Professional (CISSP)",
+  "ISO 27001 Foundation",
+  "Certified Data Management Professional (CDMP)",
+  "Lean Six Sigma Green Belt"
+]
+
 export const caseProofs = [
   {
     title: "National Pension Platform & National Database",
