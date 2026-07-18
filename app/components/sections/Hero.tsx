@@ -34,7 +34,7 @@ export default function Hero() {
           </p>
 
           <p className="text-white/75 mb-4 max-w-2xl">
-            25+ years | up to 1500+ professionals led | large-scale AI/ML, payments, mortgage,
+            25+ years | Led projects for 1500+ professionals | large-scale AI/ML, payments, mortgage,
             insurance, and platform transformations.
           </p>
 
@@ -44,6 +44,18 @@ export default function Hero() {
             </li>
             <li>
               <span className="font-semibold text-white/90">Execution discipline:</span> flagship programs delivered on time and budget with continuity and governance controls.
+            </li>
+            <li>
+              <span className="font-semibold text-white/90">AI startup builder:</span>{' '}
+              <a
+                href="https://di-factory.biz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-300 underline decoration-white/30 underline-offset-4 transition hover:text-sky-200 hover:decoration-white/60"
+              >
+                di-factory.biz
+              </a>{' '}
+              for AI venture execution, productization, and scale-ready operating models.
             </li>
             <li>
               <span className="font-semibold text-white/90">Transformation leadership:</span> cross-industry execution across leading financial institutions, global consulting firms, and ventures.
