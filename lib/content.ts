@@ -6,7 +6,8 @@ export const personalInfo = {
   email: "agonzalp@icloud.com",
   phone: "+52 55 9198 1815",
   location: "Mexico City, Mexico",
-  linkedin: "https://www.linkedin.com/in/agpascoe"
+  linkedin: "https://www.linkedin.com/in/agpascoe",
+  github: "https://github.com/agpascoe"
 }
 
 export const stats = [
@@ -146,6 +147,7 @@ export const contact = {
   email: "agonzalp@icloud.com",
   location: "Mexico City, Mexico",
   linkedin: "https://www.linkedin.com/in/agpascoe",
+  github: "https://github.com/agpascoe",
   primaryCta: "Book a Strategic Call",
   secondaryCta: "Discuss Your Transformation Mandate"
 }

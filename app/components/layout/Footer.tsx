@@ -9,9 +9,10 @@ export default function Footer() {
         </div>
         <div className="flex gap-4 items-center justify-center">
           <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-400">LinkedIn</a>
+          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-400">GitHub</a>
           <a href={`mailto:${personalInfo.email}`} className="hover:underline text-blue-400">Email</a>
         </div>
       </div>
     </footer>
   )
-} 
+}

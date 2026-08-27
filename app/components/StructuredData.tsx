@@ -10,7 +10,8 @@ export default function StructuredData() {
     },
     url: 'https://jagpascoe.info',
     sameAs: [
-      'https://www.linkedin.com/in/agpascoe'
+      'https://www.linkedin.com/in/agpascoe',
+      'https://github.com/agpascoe'
     ],
     knowsAbout: [
       'Digital Transformation',
