@@ -26,7 +26,7 @@ export const stats = [
   { number: "99.9%", label: "Time-to-Market Delivery Cadence", perspective: "Operational Excellence" },
 
   // Capability & Leadership
-  { number: "Up to 1500+", label: "Professionals Led (Global, Cross-Practice)", perspective: "Capability & Leadership" },
+  { number: "Up to 2000+", label: "Professionals Led (Global, Cross-Practice)", perspective: "Capability & Leadership" },
   { number: "30+", label: "Strategic Digital Transformation Projects", perspective: "Capability & Leadership" },
   { number: "72+ months", label: "AI/ML Venture-Building Continuity", perspective: "Capability & Leadership" }
 ]
