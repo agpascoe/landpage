@@ -117,7 +117,7 @@ export const timeline = [
     period: "2018 - 2020",
     title: "Chief Technology Officer & Industry Leader",
     company: "DXC Technology - Latin America",
-    description: "Delivered ~$100MM annual contract value through regional transformation programs; combined leadership scope across roles reached up to 1500+ professionals worldwide."
+    description: "Delivered ~$100MM annual contract value through regional transformation programs; combined leadership scope across roles reached up to 2000+ professionals worldwide."
   },
   {
     id: "afore-xxi-banorte",
