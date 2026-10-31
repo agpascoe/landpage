@@ -34,7 +34,7 @@ export default function Hero() {
           </p>
 
           <p className="text-white/75 mb-4 max-w-2xl">
-            25+ years | Led projects for 1500+ professionals | large-scale AI/ML, payments, mortgage,
+            25+ years | Led projects for 2000+ professionals | large-scale AI/ML, payments, mortgage,
             insurance, and platform transformations.
           </p>
 
